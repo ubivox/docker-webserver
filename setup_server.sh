@@ -27,24 +27,21 @@ apt install -y docker-ce
 curl -L https://github.com/docker/compose/releases/download/1.25.5/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
-# Setup webserver
-echo "Setting up password for openlitespeed webserver webadmin on port 7080"
-echo "Please enter password"
-read WEBSERVER_ADMIN_PASSWORD
-
-bin/webadmin.sh $WEBSERVER_ADMIN_PASSWORD
-
-# Update webserver to newest
-bin/webadmin.sh -U
-
-# Activate modsecure OWASP
-bin/webadmin.sh -M enable
-
 # Instructions
 echo "Create a .env file. Look at .env_example for inspiration."
 echo ""
 echo "Then run the following command inside the webserver folder to start the server:"
 echo ""
+echo "Set openlitespeed webser UI admin password (!IMPORTANT)"
+echo "bin/webadmin.sh [PASSWORD]"
+echo ""
+echo "Enable ModSecurity OWASP Rules"
+echo "bin/webadmin.sh -M enable"
+echo ""
+echo "Upgrade OLS Webserver to latest version"
+echo "bin/webadmin.sh -U"
+echo ""
+echo "Boot up Webserver using docker"
 echo "docker-compose docker-compose.yml up -d"
 echo ""
 echo "More information: https://github.com/ubivox/webserver"
