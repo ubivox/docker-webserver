@@ -40,5 +40,12 @@ bin/webadmin.sh -U
 # Activate modsecure OWASP
 bin/webadmin.sh -M enable
 
-# Start docker
-docker-compose -f webserver/docker-compose.yml up -d --build
+# Instructions
+echo "Create a .env file. Look at .env_example for inspiration."
+echo ""
+echo "Then run the following command inside the webserver folder to start the server:"
+echo ""
+echo "docker-compose docker-compose.yml up -d"
+echo ""
+echo "More information: https://github.com/ubivox/webserver"
+echo ""
