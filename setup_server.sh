@@ -27,9 +27,6 @@ apt install -y docker-ce
 curl -L https://github.com/docker/compose/releases/download/1.25.5/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
-# Start docker
-docker-compose -f webserver/docker-compose.yml -d --build
-
 # Setup webserver
 echo "Setting up password for openlitespeed webserver webadmin on port 7080"
 echo "Please enter password"
@@ -42,3 +39,6 @@ bin/webadmin.sh -U
 
 # Activate modsecure OWASP
 bin/webadmin.sh -M enable
+
+# Start docker
+docker-compose -f webserver/docker-compose.yml up -d --build
