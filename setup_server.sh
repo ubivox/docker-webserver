@@ -24,6 +24,10 @@ apt update
 apt install -y docker-ce
 systemctl status docker
 
+# Install docker composer
+curl -L https://github.com/docker/compose/releases/download/1.25.5/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+
 # Start docker
 docker-compose -f webserver/docker-compose.yml -d --build
 
