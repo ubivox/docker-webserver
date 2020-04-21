@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Export the vars in .env into your shell:
+export $(egrep -v '^#' .env | xargs)
+
+# Set dir
+DIR="$(dirname "$(readlink -f "$0")")"
+
 # Update
 apt update && apt upgrade -y
 
@@ -17,4 +23,19 @@ add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bi
 apt update
 apt install -y docker-ce
 systemctl status docker
-sudo usermod -aG docker ${USER}
+
+# Start docker
+docker-compose -f webserver/docker-compose.yml -d --build
+
+# Setup webserver
+echo "Setting up password for openlitespeed webserver webadmin on port 7080"
+echo "Please enter password"
+read WEBSERVER_ADMIN_PASSWORD
+
+bin/webadmin.sh $WEBSERVER_ADMIN_PASSWORD
+
+# Update webserver to newest
+bin/webadmin.sh -U
+
+# Activate modsecure OWASP
+bin/webadmin.sh -M enable
